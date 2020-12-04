@@ -10,7 +10,7 @@ node {
    }
    stage('代码审查') {
                    //引入sonarqubescanner工具
-               def scannerHome = tool 'sonarqube-scanner'
+               def scannerHome = tool 'sonar-scanner'
                    //引入sonarqube服务器环境
                withSonarQubeEnv('sonarqube') {
                        sh """
