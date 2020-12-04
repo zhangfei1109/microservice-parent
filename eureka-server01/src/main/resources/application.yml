@@ -19,8 +19,8 @@ eureka:
 #      defaultZone: http://localhost:8762/eureka/
 #单机版
   client:
-    register-with-eureka: false #服务端必配，禁止自动注册
-    fetch-registry: false #服务端必配，表示自己就是注册中心，不需要去检索服务
+#    register-with-eureka: false #服务端必配，禁止自动注册
+#    fetch-registry: false #服务端必配，表示自己就是注册中心，不需要去检索服务
     service-url:   #注册中心对外暴露的注册地址
       defaultZone: http://localhost:${server.port}/eureka/
   server:
