@@ -37,14 +37,14 @@ node {
        sh "docker push ${harbor_url}/${harbor_project_name}/${imageName}"
        }
    //=====以下为远程调用进行项目部署========
-       sshPublisher(publishers: [sshPublisherDesc(configName: 'master_server',
-       transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand:
-       "/data/devops/jenkins_shell/deploy.sh $harbor_url $harbor_project_name $project_name
-        $tag $port", execTimeout: 120000, flatten: false, makeEmptyDirs: false,
-        noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '',
-        remoteDirectorySDF: false, removePrefix: '', sourceFiles: '')],
-        usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
-
+      // sshPublisher(publishers: [sshPublisherDesc(configName: 'master_server',
+      // transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: "/
+      // "/data/devops/jenkins_shell/deploy.sh $harbor_url $harbor_project_name $project_name
+      //  $tag $port", execTimeout: 120000, flatten: false, makeEmptyDirs: false,
+       // noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '',
+       // remoteDirectorySDF: false, removePrefix: '', sourceFiles: '')],
+       // usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
+       sshPublisher(publishers: [sshPublisherDesc(configName: 'master_server', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: "/data/devops/jenkins_shell/deploy.sh $harbor_url $harbor_project_name $project_name $tag $port", execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
     }
 
 }
