@@ -7,6 +7,12 @@ pipeline {
                 checkout([$class: 'GitSCM', branches: [[name: "*/${branch}"]], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '789cd760-ed0d-453f-b722-d593e50ac3b3', url: 'http://10.14.0.62:82/microservice/microservice-parent.git']]])
             }
         }
+        stage('编译构建') {
+            steps {
+                   sh "mvn -f ${project_name} clean package"
+            }
+        }
+
         stage('代码审查') {
              steps {
                 //引入sonarqubescanner工具
