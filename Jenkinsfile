@@ -1,3 +1,9 @@
+//构建版本的名称
+def tag = "latest"
+//Harbor私服地址
+def harbor_url = "10.14.0.64:85"
+//Harbor的项目名称
+def harbor_project_name = "tensquare"
 pipeline {
     agent any
 
@@ -9,8 +15,12 @@ pipeline {
         }
         stage('编译构建') {
             steps {
-             //编译，构建本地镜像
+            //定义镜像名称
+                   def imageName = "${project_name}:${tag}"
+                   //编译，构建本地镜像
                    sh "mvn -f ${project_name} clean package dockerfile:build"
+                   //给镜像打标签
+                   sh "docker tag ${imageName} ${harbor_url}/${harbor_project_name}/${imageName}"
             }
         }
 
