@@ -9,7 +9,8 @@ pipeline {
         }
         stage('编译构建') {
             steps {
-                   sh "mvn -f ${project_name} clean package"
+             //编译，构建本地镜像
+                   sh "mvn -f ${project_name} clean package dockerfile:build"
             }
         }
 
