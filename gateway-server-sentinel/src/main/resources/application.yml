@@ -31,4 +31,4 @@ eureka:
 #集群版注册中心
 #      defaultZone: http://localhost:8761/eureka/,http://localhost:8762/eureka/
 #单机版注册中心
-      defaultZone: http:///10.14.0.62:8761/eureka/
+      defaultZone: http:///10.14.0.62:8761/eureka

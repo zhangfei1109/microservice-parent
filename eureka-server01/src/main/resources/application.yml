@@ -22,7 +22,7 @@ eureka:
     register-with-eureka: false #服务端必配，禁止自动注册
     fetch-registry: false #服务端必配，表示自己就是注册中心，不需要去检索服务
     service-url:   #注册中心对外暴露的注册地址
-      defaultZone: http://10.14.0.62:${server.port}/eureka/
+      defaultZone: http://10.14.0.62:${server.port}/eureka
   server:
     enable-self-preservation: false #关闭自我保护
 
