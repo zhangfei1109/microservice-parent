@@ -30,7 +30,7 @@ node {
                           cd ${project_name}
                           ${scannerHome}/bin/sonar-scanner
                        """
-               }
+                     }
             }
    }
 
