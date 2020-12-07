@@ -5,7 +5,7 @@ spring:
 
 ---
 server:
-  port: 10086
+  port: 8761
 spring:
   # Ö¸¶¨profile=eureka-server1
   profiles: eureka-server1
@@ -20,7 +20,7 @@ eureka:
 
 ---
 server:
-  port: 10086
+  port: 8761
 spring:
   profiles: eureka-server2
 eureka:
