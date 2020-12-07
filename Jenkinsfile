@@ -67,12 +67,13 @@ node {
            if(currentServer=="master_server"){
                  activeProfile = activeProfile+"eureka-server1"
            }else if(currentServer=="slave_server"){
-                 activeProfile = activeProfile+"eureka-server2"
-           }
 
+                 activeProfile = activeProfile+"eureka-server2"
+              }
+         }
             //项目部署
        sshPublisher(publishers: [sshPublisherDesc(configName: "currentServerName", transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: "/data/devops/jenkins_shell/deployCluster.sh $harbor_url $harbor_project_name $currentProjectName $tag $currentProjectPort $activeProfile", execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
-                 }
+
          }
    }
 }
