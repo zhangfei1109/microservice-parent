@@ -10,8 +10,8 @@ eureka:
   instance:
     hostname: 10.14.0.62
   client:
-    registerWithEureka: false
-    fetchRegistry: false
+    register-with-eureka: false #服务端必配，禁止自动注册
+    fetch-registry: false #服务端必配，表示自己就是注册中心，不需要去检索服务
     serviceUrl:
       defaultZone: http://10.14.0.64:10086/eureka/
 ---
@@ -23,7 +23,7 @@ eureka:
   instance:
     hostname: 10.14.0.64
   client:
-    registerWithEureka: false
-    fetchRegistry: false
+    register-with-eureka: false #服务端必配，禁止自动注册
+    fetch-registry: false #服务端必配，表示自己就是注册中心，不需要去检索服务
     serviceUrl:
       defaultZone: http://10.14.0.62:10086/eureka/
