@@ -1,5 +1,5 @@
 server:
-  port: 9001 #¶Ë¿Ú
+  port: 10020 #¶Ë¿Ú
 
 spring:
   application:

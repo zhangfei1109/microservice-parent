@@ -7,12 +7,23 @@ def harbor_project_name = "tensquare"
 //Harbor的凭证
 def harbor_auth = "31e1ce09-8e38-4c98-9d2e-661608b1abfd"
 node {
+   //把选择的项目信息转为数组
+   def selectedProjects = "${project_name}".split(',')
+
    stage('拉取代码') {
                 checkout([$class: 'GitSCM', branches: [[name: "*/${branch}"]], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '789cd760-ed0d-453f-b722-d593e50ac3b3', url: 'http://10.14.0.62:82/microservice/microservice-parent.git']]])
    }
    stage('代码审查') {
-                   //引入sonarqubescanner工具
-               def scannerHome = tool 'sonar-scanner'
+         for(int i=0;i<selectedProjects.size();i++){
+           //取出每个项目的名称和端口
+           def currentProject = selectedProjects[i];
+           //项目名称
+           def currentProjectName = currentProject.split('@')[0]
+           //项目启动端口
+           def currentProjectPort = currentProject.split('@')[1]
+
+            //引入sonarqubescanner工具
+            def scannerHome = tool 'sonar-scanner'
                    //引入sonarqube服务器环境
                withSonarQubeEnv('sonarqube') {
                        sh """
@@ -20,6 +31,7 @@ node {
                           ${scannerHome}/bin/sonar-scanner
                        """
                }
+            }
    }
 
    stage('编译，构建镜像，部署服务') {
@@ -39,7 +51,7 @@ node {
    //=====以下为远程调用进行项目部署========
       // sshPublisher(publishers: [sshPublisherDesc(configName: 'master_server',
       // transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: "/
-      // "/data/devops/jenkins_shell/deploy.sh $harbor_url $harbor_project_name $project_name
+      // "/ data/devops/jenkins_shell/deploy.sh $harbor_url $harbor_project_name $project_name
       //  $tag $port", execTimeout: 120000, flatten: false, makeEmptyDirs: false,
        // noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '',
        // remoteDirectorySDF: false, removePrefix: '', sourceFiles: '')],
