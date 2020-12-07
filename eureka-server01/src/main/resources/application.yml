@@ -13,6 +13,8 @@ eureka:
   instance:
     # 指定当profile=eureka-server1时，主机名是eureka-server1
     hostname: 10.14.0.62
+    prefer-ip-address: true   #是否使用ip地址注册
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
   client:
     register-with-eureka: false #服务端必配，禁止自动注册
     fetch-registry: false #服务端必配，表示自己就是注册中心，不需要去检索服务
@@ -28,6 +30,8 @@ spring:
 eureka:
   instance:
     hostname: 10.14.0.64
+    prefer-ip-address: true   #是否使用ip地址注册
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
   client:
     register-with-eureka: false #服务端必配，禁止自动注册
     fetch-registry: false #服务端必配，表示自己就是注册中心，不需要去检索服务
