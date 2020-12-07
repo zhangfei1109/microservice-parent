@@ -16,18 +16,18 @@ node {
    stage('代码审查') {
          for(int i=0;i<selectedProjects.size();i++){
            //取出每个项目的名称和端口
-           def currentProject = selectedProjects[i];
+           def projectInfo = selectedProjects[i];
            //项目名称
-           def currentProjectName = currentProject.split('@')[0]
+           def currentProjectName = "${projectInfo}".split("@")[0]
            //项目启动端口
-           def currentProjectPort = currentProject.split('@')[1]
+           def currentProjectPort = "${projectInfo}".split("@")[1]
 
             //引入sonarqubescanner工具
             def scannerHome = tool 'sonar-scanner'
                    //引入sonarqube服务器环境
                withSonarQubeEnv('sonarqube') {
                        sh """
-                          cd ${project_name}
+                          cd ${currentProjectName}
                           ${scannerHome}/bin/sonar-scanner
                        """
                      }
