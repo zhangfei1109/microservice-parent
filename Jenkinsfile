@@ -56,24 +56,24 @@ node {
        sh "docker login -u ${username} -p ${password} ${harbor_url}"
    //上传镜像
        sh "docker push ${harbor_url}/${harbor_project_name}/${imageName}"
-       }
-   //遍历所有服务器，分别部署
-       for(int j=0;j<selectedServers.size();j++){
-           //每个服务名称
-           def currentServerName = selectedServers[j]
-           //添加微服务运行时的参数：spring.profiles.active
-           def activeProfile = "--spring.profiles.active="
-           //根据不同的微服务读取不同的Eureka配置信息
-           if(currentServer=="master_server"){
-                 activeProfile = activeProfile+"eureka-server1"
-           }else if(currentServer=="slave_server"){
 
-                 activeProfile = activeProfile+"eureka-server2"
-              }
-         }
+       }
+
+   //遍历所有服务器，分别部署
+            for(int j=0;j<selectedServers.size();j++){
+                //每个服务名称
+                def currentServerName = selectedServers[j]
+                //添加微服务运行时的参数：spring.profiles.active
+                def activeProfile = "--spring.profiles.active="
+                //根据不同的微服务读取不同的Eureka配置信息
+                if(currentServer=="master_server"){
+                      activeProfile = activeProfile+"eureka-server1"
+                }else if(currentServer=="slave_server"){
+                      activeProfile = activeProfile+"eureka-server2"
+                }
+           }
             //项目部署
        sshPublisher(publishers: [sshPublisherDesc(configName: "currentServerName", transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: "/data/devops/jenkins_shell/deployCluster.sh $harbor_url $harbor_project_name $currentProjectName $tag $currentProjectPort $activeProfile", execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
 
-         }
-   }
-}
+   }  //
+}  //
