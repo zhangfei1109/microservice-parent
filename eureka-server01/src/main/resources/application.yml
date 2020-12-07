@@ -1,7 +1,7 @@
 # ¼¯Èº°æ
 spring:
   application:
-    name: EUREKA-HA
+    name: eureka-server
 
 ---
 server:
