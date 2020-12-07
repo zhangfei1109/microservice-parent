@@ -66,7 +66,7 @@ node {
            //根据不同的微服务读取不同的Eureka配置信息
            if(currentServer=="master_server"){
                  activeProfile = activeProfile+"eureka-server1"
-           }else if(currentServer=="slave_server1"){
+           }else if(currentServer=="slave_server"){
                  activeProfile = activeProfile+"eureka-server2"
            }
 
