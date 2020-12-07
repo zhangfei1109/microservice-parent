@@ -1,33 +1,31 @@
-server:
-  port: 10086
-
+# 集群版
 spring:
   application:
-    name: eureka-server01
+    name: EUREKA-HA
 
-#eureka:
-#集群版
-#  instance:
-#    hostname: eureka01
-#    prefer-ip-address: true   #是否使用ip地址注册
-#    instance-id: ${spring.cloud.client.ip-address}:${server.port}
-#  client:
-#    register-with-eureka: false #服务端必配，禁止自动注册
-#    fetch-registry: false #服务端必配，表示自己就是注册中心，不需要去检索服务
-#    # 指向另外一个注册中心，
-#    service-url:   #注册中心对外暴露的注册地址
-#      defaultZone: http://localhost:8762/eureka/
-
-单机版
+---
+server:
+  port: 10086
+spring:
+  # 指定profile=eureka-server1
+  profiles: eureka-server1
+eureka:
   instance:
-    hostname: eureka01
-    prefer-ip-address: true   #是否使用ip地址注册
-    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+    # 指定当profile=eureka-server1时，主机名是eureka-server1
+    hostname: 10.14.0.62
   client:
-    register-with-eureka: false #服务端必配，禁止自动注册
-    fetch-registry: false #服务端必配，表示自己就是注册中心，不需要去检索服务
-    service-url:   #注册中心对外暴露的注册地址
-      defaultZone: http://10.14.0.62:${server.port}/eureka/
-  #  defaultZone: http://localhost:${server.port}/eureka/
-#  server:
-#    enable-self-preservation: false #关闭自我保护
+    service-url:
+      # 将自己注册到eureka-server1、eureka-server2这个Eureka上面去
+      defaultZone: http://10.14.0.62:10086/eureka/,http://10.14.0.64:10086/eureka/
+
+---
+server:
+  port: 10086
+spring:
+  profiles: eureka-server2
+eureka:
+  instance:
+    hostname: 10.14.0.64
+  client:
+    service-url:
+      defaultZone: http://10.14.0.62:10086/eureka/,http://10.14.0.64:10086/eureka/
