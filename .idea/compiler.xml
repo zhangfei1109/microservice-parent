@@ -6,18 +6,19 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="gateway-server-sentinel" />
         <module name="product-service" />
-        <module name="eureka-server01" />
         <module name="order-service" />
+        <module name="eureka-server01" />
+        <module name="gateway-server-sentinel" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="eureka-server01" target="1.8" />
-      <module name="gateway-server-sentinel" target="1.8" />
-      <module name="micorservice-parent" target="1.8" />
-      <module name="order-service" target="1.8" />
+      <module name="eureka-server01" target="1.5" />
+      <module name="gateway-server-sentinel" target="1.5" />
+      <module name="micorservice-parent" target="1.5" />
+      <module name="order-service" target="1.5" />
       <module name="product-service" target="1.8" />
+      <module name="yhd-service-asls" target="1.5" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
