@@ -1,0 +1,39 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: gateway-server-sentinel
+  labels:
+    app: gateway-server-sentinel
+spec:
+  type: NodePort
+  ports:
+    - port: 10020
+      name: gateway-server-sentinel
+      targetPort: 10020
+  selector:
+    app: gateway-server-sentinel
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: gateway-server-sentinel
+spec:
+  serviceName: "gateway-server-sentinel"
+  replicas: 2
+  selector:
+    matchLabels:
+      app: gateway-server-sentinel
+  template:
+    metadata:
+      labels:
+        app: gateway-server-sentinel
+    spec:
+      imagePullSecrets:
+        - name: $SECRET_NAME
+      containers:
+        - name: gateway-server-sentinel
+          image: $IMAGE_NAME
+          ports:
+            - containerPort: 10020
+  podManagementPolicy: "Parallel"
