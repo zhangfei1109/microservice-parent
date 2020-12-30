@@ -16,4 +16,4 @@ eureka:
 #单机版注册中心
 #      defaultZone: http://10.14.0.62:8761/eureka/
 #集群版注册中心
-      defaultZone: http://10.14.0.62:10086/eureka/,http://10.14.0.64:10086/eureka/
+      defaultZone: http://eureka-0.eureka:10086/eureka/,http://eureka-1.eureka:10086/eureka/
